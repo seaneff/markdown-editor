@@ -14,17 +14,17 @@ import (
 	"os" // we need this for port environment variable
 )
 
-// find port environment variable
-port := os.Getenv("PORT")
-
-// check that it's set, and then bind to that instead of a hardcoded port (e.g. 8080)
-if port == "" {
-	port = "8080"
-}
-
 
 // main function
 func main () {
+
+	// find port environment variable
+	port := os.Getenv("PORT")
+
+	// check that it's set, and then bind to that instead of a hardcoded port (e.g. 8080)
+	if port == "" {
+		port = "8080"
+	}
 
 	// fileserver code
 
