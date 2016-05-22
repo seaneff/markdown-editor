@@ -11,7 +11,17 @@ package main
 import (
 	"net/http"
 	"github.com/russross/blackfriday"
+	"os" // we need this for port environment variable
 )
+
+// find port environment variable
+port := os.Getenv("PORT")
+
+// check that it's set, and then bind to that instead of a hardcoded port (e.g. 8080)
+if port == "" {
+	port = "8080"
+}
+
 
 // main function
 func main () {
@@ -24,10 +34,10 @@ func main () {
 	http.Handle("/", http.FileServer(http.Dir("public")))
 
 	// start the server
-	// serve the files in the current directory on the port 8080
 	// the handler is nil, assumes HTTP requests will be handled by the
 	// net/http packages default (it's called http.ServeMux)
-	http.ListenAndServe(":8080", nil)
+	// bind to the port we identified above (will be 8080 unless something else exists)
+	http.ListenAndServe(":"+port, nil)
 
 }
 
